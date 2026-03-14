@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+    <style>
+        body {
+            background-color: #fff0f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
+            border: 2px solid #ff4d6d;
+            width: 80%;
+            max-width: 300px;
+            z-index: 10;
+        }
+
+        #message {
+            color: #800e13;
+            font-weight: bold;
+            margin-bottom: 25px;
+            min-height: 50px;
+            font-size: 1.1rem;
+            line-height: 1.4;
+        }
+
+        /* TOMBOL MERAH TEGAS */
+        button {
+            background-color: #ff0033; /* Merah Berani */
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 0, 51, 0.4);
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        button:active {
+            transform: scale(0.95);
+            background-color: #cc0029; /* Merah agak gelap pas ditekan */
+            box-shadow: 0 2px 8px rgba(255, 0, 51, 0.3);
+        }
+
+        .heart-float {
+            position: absolute;
+            color: #ff4d6d;
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            animation: moveUp 3s linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes moveUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div style="font-size: 50px; margin-bottom: 15px;">🎁</div>
+        <div id="message">Halo ganteng! Ada kejutan kecil buat kamu...</div>
+        <button onclick="nextStep()">KLIK DI SINI!</button>
+    </div>
+
+    <script>
+        let step = 0;
+        const messages = [
+            "Cieee yang hari ini ulang tahun... 🎂",
+            "Happy Birthday ya sayang! ✨",
+            "Makasih udah jadi orang paling sabar sedunia. ❤️",
+            "Tetap jadi diri kamu yang sekarang ya! 🧸",
+            "I love you more than words can say! 🥰",
+            "Traktirannya jangan lupa ya! HAHA ✌️"
+        ];
+
+        function nextStep() {
+            const msgElement = document.getElementById('message');
+            
+            if (step < messages.length) {
+                msgElement.innerText = messages[step];
+                step++;
+            } else {
+                // Pesan kalau klik sudah selesai
+                msgElement.innerText = "Udah abis pesannya, sayang! I LOVE YOU! ❤️";
+            }
+            
+            // Efek bunga/hati bertebaran
+            for(let i=0; i<3; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️'; 
+            heart.className = 'heart-float';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = '100vh';
+            heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => { heart.remove(); }, 3000);
+        }
+    </script>
+</body>
+</html>
